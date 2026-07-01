@@ -1,0 +1,22 @@
+{
+  "name": "noodlet-skills",
+  "owner": {
+    "name": "Noodlet",
+    "email": "dan@noodlet.com"
+  },
+  "metadata": {
+    "description": "Skills for building and publishing interactive lessons on Noodlet.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "noodlet-authoring",
+      "description": "Builds and publishes sandboxed interactive lessons for students. Use when a teacher wants to create a quiz, game, activity, or any interactive lesson.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/noodlet-authoring"
+      ]
+    }
+  ]
+}
