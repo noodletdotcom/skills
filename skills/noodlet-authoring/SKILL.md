@@ -34,8 +34,8 @@ Write the lesson → publish via the teacher web app → assign to a class → s
 
 Fetch these progressively as each step becomes relevant, not all at once:
 
-- [references/contract.md](https://cdn.noodlet.com/skill/references/contract.md) — the SDK API: createLesson, onStart, submitResult, complete — and how to get the SDK.
-- [references/sandbox-rules.md](https://cdn.noodlet.com/skill/references/sandbox-rules.md) — hard CSP rules (no network, no external scripts, no inline handlers) — read before writing code.
-- [references/design.md](https://cdn.noodlet.com/skill/references/design.md) — design considerations for your audience: feedback style, retries, competition, and interface clarity.
-- [references/publishing.md](https://cdn.noodlet.com/skill/references/publishing.md) — uploading and publishing a noodlet via the teacher web app.
-- [references/classes.md](https://cdn.noodlet.com/skill/references/classes.md) — creating classes, enrolling students, assigning noodlets, tracking progress.
+- [references/contract.md](references/contract.md) — the SDK API: createLesson, onStart, submitResult, complete — and how to get the SDK.
+- [references/sandbox-rules.md](references/sandbox-rules.md) — hard CSP rules (no network, no external scripts, no inline handlers) — read before writing code.
+- [references/design.md](references/design.md) — design considerations for your audience: feedback style, retries, competition, and interface clarity.
+- [references/publishing.md](references/publishing.md) — uploading and publishing a noodlet via the teacher web app.
+- [references/classes.md](references/classes.md) — creating classes, enrolling students, assigning noodlets, tracking progress.

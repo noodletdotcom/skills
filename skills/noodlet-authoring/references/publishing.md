@@ -10,7 +10,7 @@ Open the teacher app at https://teachers.noodlet.com → **Noodlets**.
 3. **Publish** — the platform sandboxes the lesson and returns:
    - A **preview URL**: open it to confirm the lesson runs and reports a score.
    - **Warnings**: each names the sandbox rule it hit and the fix (see
-     [sandbox-rules](https://cdn.noodlet.com/skill/references/sandbox-rules.md)). Address them and
+     [sandbox-rules](references/sandbox-rules.md)). Address them and
      publish again. Publishing only fails outright if there is no `index.html`.
 
 Re-publishing keeps the noodlet's URL and all class assignments intact.
@@ -18,7 +18,7 @@ Re-publishing keeps the noodlet's URL and all class assignments intact.
 ## Assign to a class
 
 **Classes** → open a class → **Assignments** → add the noodlet.
-See [classes](https://cdn.noodlet.com/skill/references/classes.md) for creating classes and
+See [classes](references/classes.md) for creating classes and
 enrolling students.
 
 ---
