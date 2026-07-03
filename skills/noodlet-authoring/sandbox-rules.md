@@ -17,7 +17,9 @@ otherwise fetch.
 `<script src="https://…">` won't load — only `'self'` and `cdn.noodlet.com` are allowed
 in `script-src`. Inline your JavaScript, or bundle library code directly into the
 file. Inline `<script>` blocks **are** allowed: the publish step hashes each one
-into the CSP so it runs.
+into the CSP so it runs. Only scripts are hashed — inline `<style>` blocks and
+`style="…"` attributes need no hashing because `style-src` allows `'unsafe-inline'`;
+styles just work.
 
 ## External assets
 
