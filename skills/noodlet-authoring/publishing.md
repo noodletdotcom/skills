@@ -77,9 +77,11 @@ teacher approves it in their browser, and you poll for a token.
      -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{}'
    ```
 
-   The publish response has a `preview_url` (share it with the teacher) and
-   `warnings` (sandbox rules the lesson hit). Fix warnings, re-upload the
-   changed files, and publish again — re-publishing keeps the noodlet's URL.
+   The publish response has a `preview_url` (share it with the teacher — it
+   opens their preview page in the Noodlet web app, after signing in, and never
+   expires) and `warnings` (sandbox rules the lesson hit). Fix warnings,
+   re-upload the changed files, and publish again — re-publishing keeps the
+   noodlet's URL.
 
 The token lasts a few hours and covers creating, updating, and publishing this
 teacher's noodlets — not class or student management (the teacher does that in
