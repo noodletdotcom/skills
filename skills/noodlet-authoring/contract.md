@@ -49,6 +49,21 @@ server-side.
 `score / maxScore` becomes a 0..1 mastery fraction; `passed` is a genuine pass/fail.
 The iframe auto-resizes — don't set a fixed height.
 
+For a lesson that benefits from more horizontal room, pass `{ layout: 'wide' }` as
+the second argument to `createLesson`. Standard currently allows up to about **846px**;
+wide may break out of the normal page column up to about **1600px**, while retaining at
+least 24px of viewport padding on each side. These are preferences and maximums, not
+guaranteed dimensions: the host may make either layout narrower on small screens. The
+default is `standard`; maximized mode remains available for either layout.
+
+```js
+window.Noodlet.createLesson({
+  onStart(ctx) {
+    // Build a wide diagram, board, simulation, etc.
+  },
+}, { layout: 'wide' })
+```
+
 ## Getting the SDK
 
 > **AI authoring note:** You should not need to fetch the SDK script or npm package
@@ -74,8 +89,17 @@ for it is already present (the injection is idempotent). Two ways to author agai
   import { createLesson } from '@noodlet/sdk'
   ```
 
+
+
   The bundled copy is what runs locally (with dev-mode warnings). Publish still injects
   the global on top — harmless, the assignment is idempotent (last-write-wins).
+
+  Prefer a local Vite development server while authoring (`npm run dev`) and open the
+  lesson there before publishing. When the SDK detects a direct local run it adds a
+  development version of the Noodlet player frame: the progress bar reacts to SDK calls,
+  standard/wide sizing is applied, and the maximize button exercises the full-screen
+  layout. Iterate there until the activity and sandbox warnings are clean, then build and
+  publish the `dist/` folder. The published preview remains the final sandbox check.
 
   Keep the build unminified — set `build.minify: false` in Vite (or the equivalent for
   your bundler). Readable source keeps the publish warnings actionable and lets you and

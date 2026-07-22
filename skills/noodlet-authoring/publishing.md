@@ -11,10 +11,11 @@ Open the teacher app at https://teachers.noodlet.com → **Noodlets**.
    is fine.
 3. **Publish** — the platform sandboxes the lesson and returns:
    - A **preview URL**: open it to confirm the lesson runs and reports a score.
-   - **Warnings**: each names the sandbox rule it hit and the fix (see
+   - **Issues**: each names the sandbox rule it hit and the fix (see
      [sandbox-rules](sandbox-rules.md)). Address them and
-     publish again. Publishing only fails outright if there is no identifiable entry
-     page (no HTML file at all, or several with none named `index.html`).
+     publish again. Errors such as missing `createLesson`, missing local scripts,
+     invalid JavaScript, or code the sandbox is guaranteed to block prevent publish.
+     Advisory layout and offline-compatibility warnings do not.
 
 Re-publishing keeps the noodlet's URL and all class assignments intact.
 
@@ -60,6 +61,9 @@ teacher approves it in their browser, and you poll for a token.
 
 4. Publish with the token (send it as `Authorization: Bearer <access_token>`
    on every call):
+
+   Titles in API requests are plain text. Do not HTML-escape them: send
+   `Lesson & Test`, not `Lesson &amp; Test`.
 
    ```sh
    # Create a draft — response has noodlet_id and source_url
