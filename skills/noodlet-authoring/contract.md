@@ -35,11 +35,14 @@ server-side.
 `onStart(ctx, info)` hands you a context with:
 
 - `reportProgress({ fraction, answers? })` — 0..1 progress as the student works.
-  `answers` is an optional array of per-question correctness so far (`true`/`false`,
-  or `null` for answered-but-ungraded): the platform shows it live as green/red
-  sections in a progress bar outside the lesson. Send the full array each time
-  (it replaces the previous one, so the question count may grow or shrink).
-  It is display-only and never stored — recorded scores come from `submitResult`.
+  The player renders this as a progress bar around your lesson, so **you don't need
+  your own progress UI**. `answers` is an optional array of per-question correctness
+  so far (`true`/`false`, or `null` for answered-but-ungraded), shown live as
+  green/red sections. Send the full snapshot each time — it *replaces* the previous
+  one, so a dynamic question count (grow or shrink) and letting students revisit and
+  change earlier answers both just work: re-send the current array. Omit `fraction`
+  for an unknown-length lesson (the bar then shows one segment per answered item).
+  Display-only and never stored — recorded scores come from `submitResult`.
 - `saveState(obj)` — persist resumable state.
 - `submitResult({ score, maxScore, passed, response?, duration? })` — record an attempt. `duration` is elapsed time in **milliseconds**; it is stored as an ISO 8601 duration string (e.g. `PT1M30S`).
 - `complete(result?)` — mark the lesson finished (pass the final result).

@@ -3,6 +3,18 @@
 Noodlets are played by students — but "students" covers a wide range, from young
 children to adult learners. Consider your target audience for each of the choices below.
 
+## What the player already provides
+
+The Noodlet player wraps your lesson in a frame that already renders, for free:
+
+- a **progress bar** driven by `reportProgress` (see the **contract** doc) — proportional
+  when you send a `fraction`, or one segment per answered item when you don't;
+- a **"Completed" badge** once you call `complete`;
+- a **maximize / back** control.
+
+Don't reproduce these inside the lesson — a second progress bar or completion banner just
+duplicates the frame. Render only your lesson's own content and let the player supply the chrome.
+
 ## Feedback and scoring
 
 - **Younger learners / low-stakes practice** — lean toward encouragement and effort
