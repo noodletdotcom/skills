@@ -33,6 +33,14 @@ A noodlet is embedded in a page, not displayed as a full-window app. The host si
 its iframe to fit the content, so there is no need to stretch the lesson to `100vh`.
 Fixed heights are still available when they suit the activity.
 
+## Missing asset
+
+An `<img>`/`<source>`/`<video>`/`<audio>`/`<track>` `src`, a CSS `url(...)`, or a
+plausible-looking relative path in a JS string literal should resolve to a file in
+the upload. This can't prove a path is actually used as an asset reference (a JS
+string that merely looks like a filename would trip it too), so it's a non-blocking
+warning — check that the file was meant to be included, or fix the path.
+
 ## No network
 
 `connect-src 'none'` — `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource` and

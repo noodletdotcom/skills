@@ -66,10 +66,13 @@ teacher approves it in their browser, and you poll for a token.
    `Lesson & Test`, not `Lesson &amp; Test`.
 
    ```sh
-   # Create a draft — response has noodlet_id and source_url
+   # Create a draft — response has noodlet_id and source_url. The body also
+   # takes optional "description" (shown to teachers/students), "teacher_notes"
+   # (teacher-only), and "agent_notes" (notes to future-you about how the lesson
+   # is built/designed) — set them when they'd genuinely help, not on every noodlet.
    curl -sS -X POST https://api.noodlet.com/teacher/noodlets \
      -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
-     -d '{"title": "Fractions Quiz"}'
+     -d '{"title": "Fractions Quiz", "agent_notes": "Plain HTML+JS, no bundler"}'
 
    # Upload each file under its own name (repeat per file, keeping relative paths).
    # No renaming needed — only with several HTML files must the entry be index.html.
