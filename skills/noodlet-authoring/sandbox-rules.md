@@ -3,15 +3,15 @@
 A noodlet runs with a strict Content-Security-Policy on an isolated origin
 (`*.cdn.noodlet.com`'s sandbox sibling). The policy is the real security boundary —
 the SDK is just a convenience library on top of it. Author to these rules and your
-lesson works the first time. The publish step blocks definite errors and warns about
+lesson works the first time. The build step blocks definite errors and warns about
 issues that may be intentional or non-essential.
 
 ## Missing createLesson
 
 Call `window.Noodlet.createLesson(...)` once so the lesson can start, report results
 and resize correctly. You can alternatively import `createLesson` from `@noodlet/sdk`.
-This is required: if the publish checker cannot verify a call, the noodlet is not
-published. Minified aliased imports are supported, but do not obfuscate the SDK call
+This is required: if the build checker cannot verify a call, the noodlet is not
+built. Minified aliased imports are supported, but do not obfuscate the SDK call
 beyond recognition.
 
 ## Missing local script
@@ -21,7 +21,7 @@ in the upload. Include the missing file or correct its path.
 
 ## Invalid JavaScript
 
-Reachable JavaScript must parse successfully. Fix syntax errors before publishing.
+Reachable JavaScript must parse successfully. Fix syntax errors before building.
 
 ## Invalid HTML encoding
 
@@ -52,7 +52,7 @@ otherwise fetch.
 
 `<script src="https://…">` won't load — only `'self'` and `cdn.noodlet.com` are allowed
 in `script-src`. Inline your JavaScript, or bundle library code directly into the
-file. Inline `<script>` blocks **are** allowed: the publish step hashes each one
+file. Inline `<script>` blocks **are** allowed: the build step hashes each one
 into the CSP so it runs. Only scripts are hashed — inline `<style>` blocks and
 `style="…"` attributes need no hashing because `style-src` allows `'unsafe-inline'`;
 styles just work.

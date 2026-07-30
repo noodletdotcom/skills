@@ -74,7 +74,7 @@ window.Noodlet.createLesson({
 > the rest are all documented in this file. Include the script tag in the lesson HTML
 > you write, but do not fetch or read the SDK source itself.
 
-`window.Noodlet` is **injected automatically** at publish — whether or not a script tag
+`window.Noodlet` is **injected automatically** at build time — whether or not a script tag
 for it is already present (the injection is idempotent). Two ways to author against it:
 
 - **Hand-written HTML.** Include
@@ -82,7 +82,7 @@ for it is already present (the injection is idempotent). Two ways to author agai
   is optional once published (the global is injected either way), but including it means
   the lesson runs correctly when opened directly in a browser during authoring — and
   critically, the SDK will surface sandbox violation warnings to the user in that mode,
-  flagging network calls and blocked external scripts before you publish.
+  flagging network calls and blocked external scripts before you build.
 - **Bundler / npm.** Install the package and import it directly:
 
   ```sh
@@ -94,18 +94,18 @@ for it is already present (the injection is idempotent). Two ways to author agai
 
 
 
-  The bundled copy is what runs locally (with dev-mode warnings). Publish still injects
+  The bundled copy is what runs locally (with dev-mode warnings). The build still injects
   the global on top — harmless, the assignment is idempotent (last-write-wins).
 
   Prefer a local Vite development server while authoring (`npm run dev`) and open the
-  lesson there before publishing. When the SDK detects a direct local run it adds a
+  lesson there before building it. When the SDK detects a direct local run it adds a
   development version of the Noodlet player frame: the progress bar reacts to SDK calls,
   standard/wide sizing is applied, and the maximize button exercises the full-screen
   layout. Iterate there until the activity and sandbox warnings are clean, then build and
-  publish the `dist/` folder. The published preview remains the final sandbox check.
+  build the `dist/` folder. The built preview remains the final sandbox check.
 
   Keep the build unminified — set `build.minify: false` in Vite (or the equivalent for
-  your bundler). Readable source keeps the publish warnings actionable and lets you and
+  your bundler). Readable source keeps the build warnings actionable and lets you and
   the platform audit exactly what runs in front of students.
 
 See the **sandbox-rules** reference for the hard constraints every lesson must respect,
