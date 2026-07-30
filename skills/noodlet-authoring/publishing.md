@@ -110,5 +110,5 @@ enrolling students.
 
 Prefer tools over the web app? Connect the Noodlet MCP server
 (`claude mcp add --transport http noodlet https://mcp.noodlet.local/mcp`) —
-`edit_noodlet`, `publish_noodlet`, `create_class`, `assign_noodlet`, and
+`edit_noodlet`, `build_noodlet`, `create_class`, `assign_noodlet`, and
 `list_progress` run the same pipeline without leaving the conversation.
