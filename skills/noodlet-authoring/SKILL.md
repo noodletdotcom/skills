@@ -19,10 +19,10 @@ file at its relative path, with an `index.html` at the root. If you build with a
 bundler, prefer readable, unminified output: it keeps the publish checks legible and
 lets you (and the platform) see exactly what runs in front of students.
 
-> **AI note — build what they asked for.** Never invent the topic. A bare subject
-> ("maths", "science") is not a topic — "adding fractions" is. If the request doesn't
-> say what the lesson should teach, ask that one question and wait for the answer:
-> a guessed topic wastes the teacher's time however good the lesson is.
+> **AI note — build what they asked for.** Never invent the topic. If the request
+> doesn't say what the noodlet should teach or test, ask that one question and wait
+> for the answer — a guessed topic wastes the teacher's time however good the
+> activity is.
 > Everything else is yours to decide: age group, activity type, length, structure.
 > Pick sensible defaults and build, then name the choices you made in a line or two
 > when you hand over the preview ("pitched at Year 4, five questions, retry on a
@@ -40,7 +40,7 @@ lets you (and the platform) see exactly what runs in front of students.
 
 ## Before you start
 
-Aim for a working first pass quickly. A topic is enough to begin — infer a sensible age group, activity type, and structure from context, then build it. The topic is the one thing you must not invent, and a bare subject ("maths") is not a topic: if the request doesn't say what to teach, ask for it and wait. Once the teacher can see a preview, that's the right moment to ask refinement questions (age group, difficulty, number of questions, style, etc.) — and to tell them, briefly, which of those you decided for them.
+Aim for a working first pass quickly. A topic is enough to begin — infer a sensible age group, activity type, and structure from context, then build it. The topic is the one thing you must not invent: if the request doesn't say what to teach or test, ask for it and wait. Once the teacher can see a preview, that's the right moment to ask refinement questions (age group, difficulty, number of questions, style, etc.) — and to tell them, briefly, which of those you decided for them.
 
 ## Workflow
 
