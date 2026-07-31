@@ -50,7 +50,10 @@ server-side.
 - `reportError(msg)` — surface a problem.
 
 `score / maxScore` becomes a 0..1 mastery fraction; `passed` is a genuine pass/fail.
-The iframe auto-resizes — don't set a fixed height.
+The iframe auto-resizes — don't set a rigid fixed height. Prefer a stable root shell:
+put outer spacing and the page background on `body` (or one root wrapper), and use
+`min-height: 100vh` when it should fill the available iframe height. Here `100vh`
+means the iframe viewport, not the surrounding browser window.
 
 For a lesson that benefits from more horizontal room, pass `{ layout: 'wide' }` as
 the second argument to `createLesson`. Standard currently allows up to about **846px**;

@@ -29,9 +29,11 @@ HTML files must be UTF-8 so they can be parsed, sandboxed, and have the SDK inje
 
 ## Viewport layout
 
-A noodlet is embedded in a page, not displayed as a full-window app. The host sizes
-its iframe to fit the content, so there is no need to stretch the lesson to `100vh`.
-Fixed heights are still available when they suit the activity.
+A noodlet's viewport is its iframe, not the surrounding browser window. Using
+`min-height: 100vh` on `body` or a root shell is encouraged when the lesson should
+fill the available iframe height. Put outer spacing and the page background on that
+shell rather than in a first child's collapsing vertical margin. Flex or grid can
+then deliberately distribute any extra height when the activity benefits from it.
 
 ## Missing asset
 
