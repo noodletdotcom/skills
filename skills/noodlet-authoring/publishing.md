@@ -36,6 +36,17 @@ this works for a teacher who has never used Noodlet.
 
 3. Poll every `interval` seconds until approved:
 
+   Poll **silently**. Start one bounded/background polling job (or use your
+   environment's wait mechanism) rather than issuing a new visible command or
+   commentary message for every attempt. Treat `authorization_pending` as an
+   internal wait state: suppress it completely. After showing the approval link
+   once, say only that you are waiting; do not narrate checks, repeat the link, or
+   tell the teacher to click the button again. Surface something new only when the
+   token arrives, the request is denied/expires, or enough time has passed that the
+   teacher may genuinely need help. If your tool reviews shell/network commands,
+   keep the timed polling loop inside one tool invocation so it does not ask for
+   approval on every poll.
+
    ```sh
    curl -sS -X POST https://api.noodlet.com/agent/token \
      -H 'Content-Type: application/json' \
@@ -49,6 +60,29 @@ this works for a teacher who has never used Noodlet.
    If polling isn't possible in your environment, the approval page also offers
    the teacher the token behind a "give it to the agent manually" reveal — you
    can ask them to paste it to you instead.
+
+   **Antigravity CLI only:** use this recovery path only if the Noodlet MCP server
+   is installed, `/mcp` shows it as unauthorized, and there is no Authenticate action
+   or other way to trigger normal MCP OAuth. Use the short-lived device token as the
+   MCP credential. Merge (do not replace) the `noodlet`
+   entry in `~/.gemini/config/mcp_config.json`, preserving every other server:
+
+   ```json
+   {
+     "mcpServers": {
+       "noodlet": {
+         "serverUrl": "https://mcp.noodlet.com/mcp",
+         "headers": { "Authorization": "Bearer <access_token>" }
+       }
+     }
+   }
+   ```
+
+   Then restart the Noodlet server from `/mcp`. This credential still exposes only
+   Noodlet's lesson listing, editing, and building tools; it cannot manage classes,
+   students, assignments, progress, or deletion. It expires after `expires_in`, so
+   repeat the device flow and replace only the header when it does. Never print the
+   token back to the teacher or commit this user-level configuration to a repository.
 
 4. Build it with the token (send it as `Authorization: Bearer <access_token>`
    on every call):
