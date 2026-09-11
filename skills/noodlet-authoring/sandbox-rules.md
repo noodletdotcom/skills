@@ -43,12 +43,21 @@ the upload. This can't prove a path is actually used as an asset reference (a JS
 string that merely looks like a filename would trip it too), so it's a non-blocking
 warning — check that the file was meant to be included, or fix the path.
 
-## No network
+## No external network
 
-`connect-src 'none'` — `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource` and
-`navigator.sendBeacon` are all blocked. A noodlet must be completely self-contained:
-no analytics, no third-party CDNs, no APIs. Precompute or inline anything you'd
-otherwise fetch.
+`connect-src 'self'` — `fetch` and `XMLHttpRequest` can load the lesson's own files
+by relative path, and nothing else:
+
+```js
+const data = await (await fetch('data.json')).json();
+// or, in a module script:
+import data from './data.json' with { type: 'json' };
+```
+
+Every other origin is blocked, `cdn.noodlet.com` included: no analytics, no third-party
+APIs, no remote data. The lesson's origin serves its uploaded files and nothing more,
+so there is no server for `WebSocket`, `EventSource` or `sendBeacon` to talk to. Ship
+any data the lesson needs as a file in the upload, or inline it.
 
 ## No external scripts
 
