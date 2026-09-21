@@ -8,7 +8,11 @@ server-side.
 ```html
 <!doctype html>
 <html>
-  <head><meta charset="utf-8" /><title>My Lesson</title></head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fractions of a Pizza</title>
+    <meta name="description" content="Year 3 · split pizzas into halves, thirds and quarters." />
+  </head>
   <body>
     <div id="app"></div>
     <script>
@@ -29,6 +33,10 @@ server-side.
   </body>
 </html>
 ```
+
+Give the page a real `<title>` — the lesson's own name, as a teacher would say it — and
+a one-line `<meta name="description">`. Noodlet names a new noodlet from them, so a
+generic title ("My Lesson", "Document") leaves the teacher renaming it by hand.
 
 ## Context methods
 

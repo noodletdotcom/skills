@@ -87,17 +87,18 @@ this works for a teacher who has never used Noodlet.
 4. Build it with the token (send it as `Authorization: Bearer <access_token>`
    on every call):
 
-   Titles in API requests are plain text. Do not HTML-escape them: send
-   `Lesson & Test`, not `Lesson &amp; Test`.
+   There is no title to send: the lesson's own `<title>` and
+   `<meta name="description">` are its title and description, read on every
+   upload — to rename it, edit them and re-upload.
 
    ```sh
-   # Create a draft — response has noodlet_id and source_url. The body also
-   # takes optional "description" (shown to teachers/students), "teacher_notes"
-   # (teacher-only), and "agent_notes" (notes to future-you about how the lesson
-   # is built/designed) — set them when they'd genuinely help, not on every noodlet.
+   # Create a draft — response has noodlet_id and source_url. The body takes
+   # optional "teacher_notes" (teacher-only) and "agent_notes" (notes to future-you
+   # about how the lesson is built/designed) — set them when they'd genuinely help,
+   # not on every noodlet.
    curl -sS -X POST https://api.noodlet.com/teacher/noodlets \
      -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
-     -d '{"title": "Fractions Quiz", "agent_notes": "Plain HTML+JS, no bundler"}'
+     -d '{"agent_notes": "Plain HTML+JS, no bundler"}'
 
    # Upload each file under its own name (repeat per file, keeping relative paths).
    # No renaming needed — only with several HTML files must the entry be index.html.
@@ -130,23 +131,26 @@ permission. Assigning it to students is where you check with them first.
 
 ## If the teacher does it in the web app
 
-Only when you have neither MCP tools nor a shell — give them the lesson file and
-these steps. Open the teacher app at https://teachers.noodlet.com → **Noodlets**.
+Only when you have neither MCP tools nor a shell — give them the lesson file (with
+its `<title>` and meta description set: they name it) and these steps. Open the
+teacher app at https://teachers.noodlet.com → **Noodlets**.
 
-1. **New noodlet** — give it a title.
-2. **Upload files** — a single HTML file of any name is fine; only when there are
-   several HTML files must the entry one be named `index.html`. Add any assets (SVG,
-   images, audio, CSS) at their relative paths. A whole `dist/` folder from a bundler
-   is fine.
-3. **Publish** — the platform sandboxes the lesson and returns:
-   - A **preview URL**: open it to confirm the lesson runs and reports a score.
-   - **Issues**: each names the sandbox rule it hit and the fix (see
-     [sandbox-rules](sandbox-rules.md)). Address them and
-     publish again. Errors such as missing `createLesson`, missing local scripts,
-     invalid JavaScript, or code the sandbox is guaranteed to block prevent publish.
-     Advisory layout and offline-compatibility warnings do not.
+1. **Upload it directly** — drop the HTML file (or a whole `dist/` folder from a
+   bundler) into the dialog. A single HTML file of any name is fine; only when there
+   are several HTML files must the entry one be named `index.html`. It's named from
+   the file and published in one step.
+2. If it published, it's in their list with a **Preview** — open it to confirm the
+   lesson runs and reports a score.
+3. If it didn't build, the dialog shows the problems and a request to paste back to
+   you. Each names the sandbox rule it hit and the fix (see
+   [sandbox-rules](sandbox-rules.md)). Fix the file; they drop the new
+   version into the same dialog, which replaces the broken one. Errors such as
+   missing `createLesson`, missing local scripts, invalid JavaScript, or code the
+   sandbox is guaranteed to block prevent publishing. Advisory layout and
+   offline-compatibility warnings do not.
 
-Re-publishing keeps the noodlet's URL and all class assignments intact.
+To change a published lesson's files later, they open it with **Edit**, upload the
+new files and **Publish** — that keeps the noodlet's URL and all class assignments.
 
 ## Assign to a class
 
