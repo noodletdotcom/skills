@@ -90,7 +90,7 @@ for it is already present (the injection is idempotent). Two ways to author agai
 
 - **Hand-written HTML.** Include
   `<script src="https://cdn.noodlet.com/sdk/noodlet-sdk.js"></script>` in the file. The tag
-  is optional once published (the global is injected either way), but including it means
+  is optional once built (the global is injected either way), but including it means
   the lesson runs correctly when opened directly in a browser during authoring — and
   critically, the SDK will surface sandbox violation warnings to the user in that mode,
   flagging network calls and blocked external scripts before you build.

@@ -80,5 +80,5 @@ works with no teacher present, so setting it as homework is an ordinary use.
 ## Assign a noodlet (both shapes)
 
 Class → **Assignments** → add the noodlet. Everyone on the class sees it in their lesson
-list immediately. Assignments survive re-publishing — the noodlet's URL stays stable when
-you update and re-publish it. A noodlet can be assigned to several classes.
+list immediately. Assignments survive an update — the noodlet's URL stays stable when
+you rebuild it with new files. A noodlet can be assigned to several classes.

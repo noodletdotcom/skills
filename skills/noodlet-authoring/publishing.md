@@ -9,7 +9,8 @@ Two routes:
 2. **The device flow below**, if you have a shell — any coding agent, no MCP needed.
 
 Only if neither is available does the teacher do it themselves in the web app (last
-section, where the button is labelled **Publish**) — paste them the lesson file.
+section, where the button is labelled **Add lesson** the first time and **Update
+lesson** after that) — paste them the lesson file.
 
 ## Build it yourself (device flow)
 
@@ -105,7 +106,7 @@ this works for a teacher who has never used Noodlet.
    curl -sS -X PUT "<source_url>/fractions-quiz.html" \
      -H "Authorization: Bearer $TOKEN" --data-binary @fractions-quiz.html
 
-   # Build it — the endpoint is named /publish, after the button in the web app
+   # Build it — this is what the web app's Add/Update button does
    curl -sS -X POST "https://api.noodlet.com/teacher/noodlets/<noodlet_id>/publish" \
      -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{}'
    ```
@@ -138,19 +139,19 @@ teacher app at https://teachers.noodlet.com → **Noodlets**.
 1. **Upload it directly** — drop the HTML file (or a whole `dist/` folder from a
    bundler) into the dialog. A single HTML file of any name is fine; only when there
    are several HTML files must the entry one be named `index.html`. It's named from
-   the file and published in one step.
-2. If it published, it's in their list with a **Preview** — open it to confirm the
+   the file and built in one step.
+2. If it built, it's in their list with a **Preview** — open it to confirm the
    lesson runs and reports a score.
 3. If it didn't build, the dialog shows the problems and a request to paste back to
    you. Each names the sandbox rule it hit and the fix (see
    [sandbox-rules](sandbox-rules.md)). Fix the file; they drop the new
    version into the same dialog, which replaces the broken one. Errors such as
    missing `createLesson`, missing local scripts, invalid JavaScript, or code the
-   sandbox is guaranteed to block prevent publishing. Advisory layout and
+   sandbox is guaranteed to block stop the build. Advisory layout and
    offline-compatibility warnings do not.
 
-To change a published lesson's files later, they open it with **Edit**, upload the
-new files and **Publish** — that keeps the noodlet's URL and all class assignments.
+To change a lesson's files later, they open it with **Edit**, upload the new files
+and press **Update lesson** — that keeps the noodlet's URL and all class assignments.
 
 ## Assign to a class
 

@@ -1,7 +1,7 @@
 ---
 name: noodlet-authoring
 description: >-
-  Builds and publishes sandboxed interactive lessons ("noodlets") for students.
+  Builds and uploads sandboxed interactive lessons ("noodlets") for students.
   Use when a teacher wants to create a quiz, game, drag-and-drop activity, or
   any interactive lesson — and whenever the words "noodlet", "lesson", or
   "publish" appear in an authoring context.
@@ -32,7 +32,7 @@ lets you (and the platform) see exactly what runs in front of students.
 > set of instructions you hand over. Two separate steps: **build** turns the files into
 > a playable lesson only the teacher can see — private, repeatable, no sign-off needed —
 > and **assign** gives it to a class, the one step that reaches students, so check that
-> one first. "Publish it", "make it live" or "get it to my class" means *build it, then
+> one first. "Add it", "publish it" or "get it to my class" means *build it, then
 > assign it if I have a class*, never *send me the steps*. Use the Noodlet MCP tools if
 > they're connected, else the device flow (you request a code, the teacher approves it
 > in their browser, you upload). Report back in their words ("it's ready — here's a link
