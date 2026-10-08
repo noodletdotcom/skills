@@ -64,8 +64,8 @@ Write the lesson → build it → assign it to a class → students play and sco
 
 Fetch these progressively as each step becomes relevant, not all at once:
 
-- [contract.md](contract.md) — the SDK API: createLesson, onStart, submitResult, complete — and how to get the SDK.
-- [sandbox-rules.md](sandbox-rules.md) — hard CSP rules (no external network, no external scripts, no inline handlers) — read before writing code.
+- [contract.md](contract.md) — the SDK API: createLesson, onStart, submitResult, complete, the pop-ups that replace alert/confirm/prompt — and how to get the SDK.
+- [sandbox-rules.md](sandbox-rules.md) — what the sandbox blocks and what the build does about it (no network, which CDN libraries are allowed, listeners not inline handlers, no native pop-ups, what is only found when the lesson runs) — read before writing code.
 - [design.md](design.md) — design considerations for your audience: feedback style, retries, competition, and interface clarity.
 - [publishing.md](publishing.md) — uploading and building a noodlet yourself (device flow) — read this before telling anyone to upload anything; also covers the teacher web app.
 - [classes.md](classes.md) — creating classes, enrolling students, assigning noodlets, tracking progress.

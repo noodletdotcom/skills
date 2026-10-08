@@ -112,9 +112,17 @@ this works for a teacher who has never used Noodlet.
    ```
 
    The response has a `preview_url` (share it with the teacher — it opens their
-   preview page in the Noodlet web app, after signing in, and never expires) and
-   `warnings` (sandbox rules the lesson hit). Fix warnings, re-upload the changed
-   files, and build again — rebuilding keeps the noodlet's URL.
+   preview page in the Noodlet web app, after signing in, and never expires),
+   `warnings` (sandbox rules the lesson hit), `scored` (false if the lesson never
+   reports a result) and `last_build`, whose `changes` list what the build rewrote
+   so the lesson runs (nothing to fix; your files are untouched). Fix warnings,
+   re-upload the changed files, and build again — rebuilding keeps the noodlet's URL.
+
+   A clean build is not proof that the lesson works: some failures only show when
+   it runs. After the teacher has tried the preview, fetch
+   `GET https://api.noodlet.com/teacher/noodlets/<noodlet_id>/build` with the same
+   token. Its `findings` list what the browser blocked while they played, each with
+   the rule and the fix. Fix those and build again.
 
 The token lasts a few hours and covers creating, updating, and building this
 teacher's noodlets — not class or student management (the teacher does that in
@@ -136,19 +144,20 @@ Only when you have neither MCP tools nor a shell — give them the lesson file (
 its `<title>` and meta description set: they name it) and these steps. Open the
 teacher app at https://teachers.noodlet.com → **Noodlets**.
 
-1. **Upload it directly** — drop the HTML file (or a whole `dist/` folder from a
-   bundler) into the dialog. A single HTML file of any name is fine; only when there
+1. **Drop it in** — drop the HTML file (or a whole `dist/` folder from a bundler)
+   onto the box at the top of the page. A single HTML file of any name is fine; only when there
    are several HTML files must the entry one be named `index.html`. It's named from
    the file and built in one step.
 2. If it built, it's in their list with a **Preview** — open it to confirm the
    lesson runs and reports a score.
-3. If it didn't build, the dialog shows the problems and a request to paste back to
+3. If it didn't build, the page shows the problems and a prompt to paste back to
    you. Each names the sandbox rule it hit and the fix (see
-   [sandbox-rules](sandbox-rules.md)). Fix the file; they drop the new
-   version into the same dialog, which replaces the broken one. Errors such as
-   missing `createLesson`, missing local scripts, invalid JavaScript, or code the
-   sandbox is guaranteed to block stop the build. Advisory layout and
-   offline-compatibility warnings do not.
+   [sandbox-rules](sandbox-rules.md)). Nothing was added to their
+   list, so fix the file and have them drop the new version onto the same box. Errors such as
+   missing local scripts, invalid JavaScript, or code the sandbox is guaranteed to
+   block stop the build. Advisory layout and offline-compatibility warnings do
+   not — nor does a missing `createLesson`, which builds a lesson that plays but
+   reports no marks.
 
 To change a lesson's files later, they open it with **Edit**, upload the new files
 and press **Update lesson** — that keeps the noodlet's URL and all class assignments.

@@ -57,6 +57,29 @@ generic title ("My Lesson", "Document") leaves the teacher renaming it by hand.
 - `requestNext()` — ask the host to advance to the next activity.
 - `reportError(msg)` — surface a problem.
 
+## Pop-ups
+
+The sandbox cannot show the browser's own `alert()`, `confirm()` or `prompt()` — in
+a lesson they silently do nothing. The SDK has its own, which look the same in every
+lesson. They return promises, so call them from an `async` function:
+
+```js
+await window.Noodlet.alert('Time is up!')
+if (await window.Noodlet.confirm('Start again?')) restart()   // true or false
+const name = await window.Noodlet.prompt('Team name?', 'Team A')   // a string, or null
+```
+
+With the npm package: `import { alert, confirm, prompt } from '@noodlet/sdk'`. Only
+one shows at a time; a second call waits for the first to be answered. For young
+children a message in the page itself is often clearer than any pop-up.
+
+## Scored and unscored
+
+A lesson that never calls `createLesson` still builds and plays, but it is
+**unscored**: the teacher sees that it was opened and never a mark. The build result
+says so (`scored: false`, and a `missing-create-lesson` warning). Unless the teacher
+has asked for something with no marks — a simulation, an explainer — report a result.
+
 `score / maxScore` becomes a 0..1 mastery fraction; `passed` is a genuine pass/fail.
 The iframe auto-resizes — don't set a rigid fixed height. Prefer a stable root shell:
 put outer spacing and the page background on `body` (or one root wrapper), and use
