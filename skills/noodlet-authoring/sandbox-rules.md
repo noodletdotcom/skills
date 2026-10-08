@@ -40,10 +40,14 @@ then deliberately distribute any extra height when the activity benefits from it
 ## Missing asset
 
 An `<img>`/`<source>`/`<video>`/`<audio>`/`<track>` `src`, a CSS `url(...)`, or a
-plausible-looking relative path in a JS string literal should resolve to a file in
-the upload. This can't prove a path is actually used as an asset reference (a JS
-string that merely looks like a filename would trip it too), so it's a non-blocking
-warning — check that the file was meant to be included, or fix the path.
+path a script hands to the browser to load (`img.src = "…"`,
+`setAttribute("src", "…")`, `new Audio("…")`) should resolve to a file in the upload.
+A path joined from pieces, such as `"assets/" + kind + ".png"`, is reported only when
+no uploaded file could fit it (`assets/*.png`). Any other string in a script is left
+alone, however much it looks like a file name: it may be the name a download is saved
+under. The build therefore misses some missing files; the teacher's preview reports
+those when the browser fails to load them. It's a non-blocking warning — include the
+file at that path, or fix the path.
 
 ## No external network
 
