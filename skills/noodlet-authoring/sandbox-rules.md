@@ -65,6 +65,16 @@ APIs, no remote data. The lesson's origin serves its uploaded files and nothing 
 so there is no server for `WebSocket`, `EventSource` or `sendBeacon` to talk to. Ship
 any data the lesson needs as a file in the upload, or inline it.
 
+## No WebRTC
+
+`RTCPeerConnection` is not available: it is removed before the lesson's code runs,
+in the page and in any frame the lesson creates. A lesson is one learner's page with
+nothing to connect to, so there is no multiplayer, no shared whiteboard and no
+peer-to-peer data. Keep everything in the page.
+
+A frame the lesson creates is sandboxed too: `srcdoc` markup is shown, script inside
+it does not run.
+
 ## No external scripts
 
 Scripts run only from the lesson's own files and `cdn.noodlet.com` (`script-src`).
