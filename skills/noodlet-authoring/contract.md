@@ -51,6 +51,8 @@ generic title ("My Lesson", "Document") leaves the teacher renaming it by hand.
   change earlier answers both just work: re-send the current array. Omit `fraction`
   for an unknown-length lesson (the bar then shows one segment per answered item).
   Display-only and never stored — recorded scores come from `submitResult`.
+  If the lesson has its own "Play again", report `{ fraction: 0, answers: [] }` when a
+  new go starts, so the player clears the last go's bar and marks.
 - `saveState(obj)` — persist resumable state.
 - `submitResult({ score, maxScore, passed, duration? })` — record an attempt. `duration` is elapsed time in **milliseconds**; it is stored as an ISO 8601 duration string (e.g. `PT1M30S`). A result is numbers and a pass/fail: nothing a learner typed is sent or stored, so mark a typed answer in the lesson and report the score.
 - `complete(result?)` — mark the lesson finished (pass the final result).
