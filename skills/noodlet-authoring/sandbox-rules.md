@@ -175,6 +175,11 @@ served from the same origin as the lesson and are referenced by relative path �
 to inline them. Use separate files freely; only inline when the asset is tiny or
 generated dynamically.
 
+A `.zip` can be one of those files too — for a learner to download
+(`<a href="pack.zip" download>`), or for the lesson to `fetch("pack.zip")` and open
+itself with a library such as JSZip, loaded by a `<script>` tag from one of the CDNs
+under "No external scripts".
+
 ## No forms
 
 `form-action 'none'` — a `<form>` can't send its data anywhere. A form is still fine
