@@ -29,6 +29,23 @@ Reachable JavaScript must parse successfully. Fix syntax errors before building.
 
 HTML files must be UTF-8 so they can be parsed, sandboxed, and have the SDK injected.
 
+## Broken HTML
+
+Markup where part of what was written never reaches the student: a quote left open
+(so the markup after it becomes the attribute's value), a comment (`<!--`) never
+closed, a `<script>` with no `</script>` (it never runs), a `<textarea>` or `<style>`
+never closed, or an attribute written twice (the second is ignored). The warning
+names the file and the line. Close what is left open, and change nothing else.
+
+## Invalid HTML
+
+Markup a browser rearranges without losing anything — a `<div>` inside a `<table>`,
+`<b><i>…</b></i>`, `<div/>` — or text after `</html>`, which shows at the bottom of
+the page and is usually left over from a paste. It is only a note: the page usually
+looks as intended, but the elements are not where the code says. A stray close tag, a
+tag after `</html>`, a bare `&` or a missing doctype are not reported at all: every
+browser reads them as the author meant.
+
 ## Too deeply nested
 
 A page's elements may sit at most 512 inside one another. A page written by hand or
@@ -94,8 +111,8 @@ it does not run.
 
 Scripts run only from the lesson's own files and `cdn.noodlet.com` (`script-src`).
 A library named in a `<script src="https://…">` tag **in the HTML file** is fine if
-it comes from one of these public CDNs — the build downloads it once and serves the
-copy from the lesson's own files, pinned so it never changes under a class:
+it comes from one of these public CDNs — the build downloads it once, keeps Noodlet's
+own copy and points the lesson at that, pinned so it never changes under a class:
 
 - `cdnjs.cloudflare.com`
 - `cdn.jsdelivr.net`
@@ -106,6 +123,30 @@ Pin a version in the URL. A script from anywhere else stops the build: inline it
 upload the file alongside the lesson. What the build cannot do is see a script the
 lesson asks for *while it is running* — a tag created in JavaScript, a dynamic
 `import()`, an `import … from 'https://…'` in a module — and those are blocked.
+
+A library that loads is not yet a library that works: some do more once they are
+running, and the sandbox stops that too. Before you add one, check it does none of
+these:
+
+- **Starts a web worker from a `blob:` URL.** Workers run only from the lesson's own
+  files (`new Worker('worker.js')` is fine); a worker made from a blob is blocked, and
+  whatever it was doing never happens.
+- **Uses WebAssembly.** Compiling it is blocked, whoever fetched the `.wasm`.
+- **Fetches more of itself while it runs** — extra parts, data, a `.wasm` — from its
+  CDN or from Noodlet's copy of it. Only a tag in the HTML is copied, and a lesson can
+  fetch only its own files.
+- **Evaluates strings as code** (see "No eval" below).
+
+Some examples, and what to do:
+
+- **canvas-confetti** — `confetti()` draws in a worker from a blob. Make your own
+  instance without one: `const fire = confetti.create(canvas, { resize: true,
+  useWorker: false })`, with a `<canvas>` in the page, and call `fire(...)`.
+- **Alpine.js, petite-vue, Vue with in-page templates** — evaluate strings. Use plain
+  JavaScript, or Vue with render functions.
+- **Babel standalone (JSX in the browser)** — injects scripts. Compile beforehand.
+- **MathJax** — loads its parts as it needs them. Use KaTeX, whose script and
+  stylesheet tags are copied with its fonts.
 
 Inline `<script>` blocks **are** allowed: the build step hashes each one into the
 CSP so it runs. A script created at runtime has no hash and is blocked, which rules
@@ -164,7 +205,7 @@ lesson itself or from `cdn.noodlet.com`. `data:` URIs are allowed for images. An
 else is blocked — a hotlinked image, an embedded video, a font fetched at runtime.
 
 One exception, as for scripts: a stylesheet named in a `<link rel="stylesheet">` tag
-in the HTML file is copied into the lesson by the build, with the fonts it refers
+in the HTML file is copied by the build in the same way, with the fonts it refers
 to, when it comes from the CDNs listed under "No external scripts" or from
 `fonts.googleapis.com` (whose fonts come from `fonts.gstatic.com`). So a Google
 Fonts link in `<head>` works as written.
@@ -233,3 +274,5 @@ bug in the lesson, not something the sandbox did.
 ### Sandbox blocked
 
 Something else the sandbox does not allow. The finding names the policy directive.
+`worker-src` is a web worker the lesson, or a library in it, started from a `blob:`
+URL: see the list of libraries under "No external scripts".

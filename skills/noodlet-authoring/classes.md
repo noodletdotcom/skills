@@ -69,8 +69,9 @@ works with no teacher present, so setting it as homework is an ordinary use.
 
 - **Nobody is enrolled**, so there is no roster, no adding, and no inviting.
 - **There is no per-student progress view.** Attempts are recorded against a seat number.
-- The teacher watches it live at Class → the class's board, which shows seats working in
-  real time and clears after 24 hours. Each seat gets a bar per activity: empty until they
+- The teacher follows it at Class → the class's board, which shows how far each seat has
+  got — its Refresh button brings it up to date; it does not update by itself — and
+  clears after 24 hours. Each seat gets a bar per activity: empty until they
   open it, filling as they work, green when they finish. They can write a name against a
   seat to make the board readable and export it — both stay in their own browser and are
   never sent to Noodlet.
